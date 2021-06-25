@@ -2,6 +2,3 @@ FROM nginx:alpine
 COPY ./index.html /usr/share/nginx/html
 RUN apk add docker
 RUN apk update
-RUN service docker start
-RUN service docker status
-RUN 
