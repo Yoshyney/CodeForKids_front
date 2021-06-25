@@ -2,13 +2,11 @@ pipeline {
     agent none
    stages {     
     stage('Nginx Setup') {
-      agent {         
-       docker {          
-         image 'nginx:alpine'         
-     }       
-  }       
+      agent { dockerfile true }         
+            
+  
   steps {
-       sh 'mvn clean install'
+       sh 'hostname'
        }
      }
    }
