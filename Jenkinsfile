@@ -1,6 +1,10 @@
 #!groovy
 
 pipeline {
+environment {
+registryCredential = 'dockerhub'
+}
+ 
   agent none
   stages {
     stage('NGINX Install') {
@@ -16,9 +20,13 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
+      script {
+      docker.withRegistry( '', registryCredential) {
         sh 'docker build -t technasia/codeforkids:latest .'
         sh 'docker push technasia/codeforkids:latest'
       }
     } 
   }
+}
+}
 }
