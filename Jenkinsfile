@@ -17,7 +17,9 @@ pipeline {
       agent any
       steps {
         sh 'docker build -t technasia/codeforkids:latest .'
+        sh 'docker images'
       }
     }
+   stage ('RUN 
   }
 }
