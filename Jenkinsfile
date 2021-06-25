@@ -17,6 +17,7 @@ registryCredential = 'dockerhub'
         sh 'hostname'
       }
     }
+
     stage('Building Image') {
       agent any
       steps {
@@ -33,4 +34,4 @@ registryCredential = 'dockerhub'
 }
 }
 }
-}
+
