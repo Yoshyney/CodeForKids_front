@@ -37,7 +37,7 @@ registryCredential = 'dockerhub'
    stage ('Run image') {
    agent any 
    steps {
-   sh 'docker run -d -p 80:80 technasia/codeforkids:latest'
+   sh 'docker run -d -p 320:320 technasia/codeforkids:latest'
 }
 }
 }
