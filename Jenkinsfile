@@ -1,12 +1,19 @@
 pipeline {
-    agent any {
-
+    agent none
    stages {     
-    stage('Nginx Setup') {
-      agent { dockerfile true }         
-             steps {
-       sh 'docker build -t technasia/codeforkids:latest .'
+    stage('Nginx install') {
+      agent {         
+       docker {          
+         image 'nginx:alpine'         
+     }       
+  }       
+  steps {
+       sh 'hostname'
        }
+    stage('Docker Build') {
+      agent any
+      steps {
+        sh 'docker build -t technasia/codeforkids:latest .'
      }
    }
  }
