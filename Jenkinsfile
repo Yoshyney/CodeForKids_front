@@ -17,7 +17,7 @@ pipeline {
       agent any
       steps {
         sh 'docker build -t technasia/codeforkids:latest .'
-        sh 'docker images'
+        sh 'docker push technasia/codeforkids:latest'
       }
     } 
   }
