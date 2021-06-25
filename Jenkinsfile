@@ -13,8 +13,3 @@ pipeline {
     }
 }
  
-    stage ('Run') {
-      steps {
-      sh 'docker run -d -p 80:80 html-serv-image:v1'
-  }
-}
