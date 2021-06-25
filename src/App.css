@@ -1,38 +1,53 @@
-.App {
+#contenu {
+  height: 817px;
+  background-color:#313131;
+}
+.menu{
+  float:left;
+  width:30%;
+  height: 817px;
+  border-radius: 0 15px 15px 0;
+  resize:horizontal;
+  overflow:auto;
+}
+#header {
+  max-width:100%;
+  height: 60px;
+  background-color: #1977E7;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#footer {
+  max-width:100%;
+  height: 60px;
+  background-color: #1977E7;
+  text-align: center;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo{
+  margin-right: 40%;
+  padding-top: 0.5%;
+  display: inline-block;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.title{
+  color: aliceblue !important;
 }
-
-.App-link {
-  color: #61dafb;
+.label-footer{
+  padding-top: 4px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-header{
+  margin-top: 0.6%;
+  display: inline-block;
+}
+.exercice-title{
+  border-radius: 0 10px 0 0;
+  height: 60px;
+  padding-top: 15px;
+  text-align: center;
+  background-color: #1977E7; 
+}
+.exercice-content{
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.text-footer{
+  color: aliceblue;
 }
