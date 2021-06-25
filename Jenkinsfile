@@ -19,7 +19,6 @@ pipeline {
         sh 'docker build -t technasia/codeforkids:latest .'
         sh 'docker images'
       }
-    }
-   stage ('RUN 
+    } 
   }
 }
