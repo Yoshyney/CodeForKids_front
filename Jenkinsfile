@@ -17,15 +17,18 @@ registryCredential = 'dockerhub'
         sh 'hostname'
       }
     }
-    stage('Docker Build') {
+    stage('Building Image') {
+      agent any
+      steps {
+        sh 'docker build -t technasia/codeforkids:latest .'
+      }
+    } 
+    stage('Pushing Image') {
       agent any
       steps {
       script {
       docker.withRegistry( '', registryCredential) {
-        sh 'docker build -t technasia/codeforkids:latest .'
         sh 'docker push technasia/codeforkids:latest'
-      }
-    } 
   }
 }
 }
