@@ -34,5 +34,11 @@ registryCredential = 'dockerhub'
 }
 }
 }
+   stage ('Run image') {
+   agent any 
+   steps {
+   sh 'docker run -d -p 80:80 technasia/codeforkids:latest'
+}
+}
 }
 }
