@@ -3,10 +3,8 @@ pipeline {
    stages {     
     stage('Nginx Setup') {
       agent { dockerfile true }         
-            
-  
-  steps {
-       sh 'hostname'
+             steps {
+       sh 'docker build -t technasia/codeforkids:latest .'
        }
      }
    }
