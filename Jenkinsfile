@@ -1,16 +1,15 @@
-pipeline {  
-environment {
-    registry = "technasia/codeforkids"
-    registryCredential = 'dockerhub'
-  }  
-agent { dockerfile true }  
-stages {
-    stage('Building image') {
-      steps{
-        script {
-          docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
-    }
-  }
-}
+pipeline {
+    agent none
+   stages {     
+    stage('Nginx Setup') {
+      agent {         
+       docker {          
+         image 'nginx:alpine'         
+     }       
+  }       
+  steps {
+       sh 'mvn clean install'
+       }
+     }
+   }
+ }
