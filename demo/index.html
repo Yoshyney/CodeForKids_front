@@ -9,6 +9,10 @@
 	</head>
 	<body>
 		<script src="three.js"></script>
+		<div id="info">
+			<strong>click</strong>: add voxel, <strong>shift + click</strong>: remove voxel</br>
+			use arrows to control characters, mouse for camera
+		</div>
 		<script type="module">
 			import * as test from './OrbitControls.js';
 
@@ -24,9 +28,16 @@
 				#pointer // THREE.Vector2
 				#cubeGeo
 				#cubeMaterial
+				#playerGeo
+				#playerMaterial
 				#objects = []
 				#rollOverMaterial
 				#rollOverMesh
+				#x = 0;
+				#y = 0;
+				#player
+				#xSpeed = 50;
+				#ySpeed = 50; 
 
 				init = () => {
 					console.log(this)
@@ -49,6 +60,11 @@
 					this.#cubeGeo = new THREE.BoxGeometry( 50, 50, 50 );
 					this.#cubeMaterial = new THREE.MeshBasicMaterial( { color: "#FFFFFF" } );
 
+					// player
+
+					this.#playerGeo = new THREE.BoxGeometry( 50, 50, 50 );
+					this.#playerMaterial = new THREE.MeshLambertMaterial( { color: 0xfeb74c, map: new THREE.TextureLoader().load( 'textures/square-outline-textured.png' ) } );
+
 					// grid
 
 					const gridHelper = new THREE.GridHelper( 1000, 20 );
@@ -63,6 +79,9 @@
 					this.#plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { visible: false } ) );
 					this.#scene.add( this.#plane );
 					this.#objects.push( this.#plane );
+
+					//finish line
+
 	
 					// lights
 	
@@ -82,18 +101,43 @@
 					controls.target.set( 0, 0.5, 0 );
 					controls.update();
 					controls.enablePan = false;
-					controls.enableDamping = true
-					this.#initEvent()
+					controls.enableDamping = true;
+					this.#initEvent();
 				}
 
 				#initEvent = () => {
+					this.#initplayer();
 					document.addEventListener( 'pointermove', this.#onPointerMove );
 					document.addEventListener( 'pointerdown', this.#onPointerDown );
 					document.addEventListener( 'keydown', this.#onDocumentKeyDown );
 					document.addEventListener( 'keyup', this.#onDocumentKeyUp );
 					window.addEventListener( 'resize', this.#onWindowResize );
+					document.addEventListener( 'keydown', this.#onKeyDown );
 				}
 
+				#initplayer = () => {
+					this.#player = new THREE.Mesh( this.#playerGeo, this.#playerMaterial );
+					this.#player.position.set(this.#x,0,this.#y);
+					this.#player.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
+					this.#scene.add( this.#player );
+					this.#objects.push( this.#player );
+					this.#render();
+				}
+
+				#onKeyDown = (event) => {
+					var keyCode = event.which;
+					if (keyCode == 90) {
+						this.#player.position.z += this.#ySpeed;
+					} else if (keyCode == 83) {
+						this.#player.position.z -= this.#ySpeed;
+					} else if (keyCode == 81) {
+						this.#player.position.x -= this.#xSpeed;
+					} else if (keyCode == 68) {
+						this.#player.position.x += this.#xSpeed;
+					} else if (keyCode == 32) {
+						this.#player.position.set(0, 0, 0);
+					}
+				}
 
 				#onPointerMove = (event) => {
 					this.#pointer.set((event.clientX / window.innerWidth) * 2 - 1, - (event.clientY / window.innerHeight) * 2 + 1 );
