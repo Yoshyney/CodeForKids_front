@@ -4,7 +4,12 @@
 		<meta charset="utf-8">
 		<title>My first three.js app</title>
 		<style>
-			body { margin: 0; }
+			body { 
+				width: 100%;
+                height: 100%;
+				margin: 0;
+				padding: 0;
+			}
 		</style>
 	</head>
 	<body>
@@ -37,7 +42,9 @@
 				#y = 0;
 				#player
 				#xSpeed = 50;
-				#ySpeed = 50; 
+				#ySpeed = 50;
+				#cubeEdge;
+				#playerEdge;
 
 				init = () => {
 					console.log(this)
@@ -58,11 +65,13 @@
 					// cubes
 
 					this.#cubeGeo = new THREE.BoxGeometry( 50, 50, 50 );
+					this.#cubeEdge = new THREE.EdgesGeometry( this.#cubeGeo );
 					this.#cubeMaterial = new THREE.MeshBasicMaterial( { color: "#FFFFFF" } );
 
 					// player
 
 					this.#playerGeo = new THREE.BoxGeometry( 50, 50, 50 );
+					this.#playerEdge = new THREE.EdgesGeometry( this.#playerGeo );
 					this.#playerMaterial = new THREE.MeshLambertMaterial( { color: 0xfeb74c, map: new THREE.TextureLoader().load( 'textures/square-outline-textured.png' ) } );
 
 					// grid
@@ -126,17 +135,22 @@
 
 				#onKeyDown = (event) => {
 					var keyCode = event.which;
-					if (keyCode == 83) {
-						this.#player.position.z += this.#ySpeed;
-					} else if (keyCode == 90) {
-						this.#player.position.z -= this.#ySpeed;
-					} else if (keyCode == 81) {
-						this.#player.position.x -= this.#xSpeed;
-					} else if (keyCode == 68) {
-						this.#player.position.x += this.#xSpeed;
-					} else if (keyCode == 32) {
+					
+					if (keyCode == 32) {
 						this.#player.position.set(0, 0, 0);
-					}
+					} else if (keyCode == 83 && this.#y <= 400) {
+						this.#player.position.z += this.#ySpeed;
+						this.#y = this.#y+this.#ySpeed;
+					} else if (keyCode == 90 && this.#y >= -450) {
+						this.#player.position.z -= this.#ySpeed;
+						this.#y = this.#y-this.#ySpeed;
+					} else if (keyCode == 81 && this.#x >= -450) {
+						this.#player.position.x -= this.#xSpeed;
+						this.#x = this.#x-this.#xSpeed;
+					} else if (keyCode == 68 && this.#x <= 400) {
+						this.#player.position.x += this.#xSpeed;
+						this.#x = this.#x+this.#xSpeed;
+					} 
 				}
 
 				#onPointerMove = (event) => {
@@ -188,7 +202,7 @@
 				}
 
 				#onDocumentKeyDown = (event) => {
-					console.log(event.keyCode)
+					//console.log(event.keyCode)
 					switch ( event.keyCode ) {
 						case 16: this.#isShiftDown = true; break;
 					}
