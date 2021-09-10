@@ -28,6 +28,9 @@
 				#pointer // THREE.Vector2
 				#cubeGeo
 				#cubeMaterial
+				#finishGeo
+				#finishMaterial
+				#finish
 				#playerGeo
 				#playerMaterial
 				#objects = []
@@ -60,6 +63,11 @@
 					this.#cubeGeo = new THREE.BoxGeometry( 50, 50, 50 );
 					this.#cubeMaterial = new THREE.MeshBasicMaterial( { color: "#FFFFFF" } );
 
+					//finish line
+
+					this.#finishGeo = new THREE.BoxGeometry( 50, 50, 50 );
+					this.#finishMaterial = new THREE.MeshBasicMaterial( { color: "#FF0000" } );
+
 					// player
 
 					this.#playerGeo = new THREE.BoxGeometry( 50, 50, 50 );
@@ -80,7 +88,7 @@
 					this.#scene.add( this.#plane );
 					this.#objects.push( this.#plane );
 
-					//finish line
+					
 
 	
 					// lights
@@ -107,6 +115,7 @@
 
 				#initEvent = () => {
 					this.#initplayer();
+					this.#initfinish();
 					document.addEventListener( 'pointermove', this.#onPointerMove );
 					document.addEventListener( 'pointerdown', this.#onPointerDown );
 					document.addEventListener( 'keydown', this.#onDocumentKeyDown );
@@ -121,6 +130,15 @@
 					this.#player.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
 					this.#scene.add( this.#player );
 					this.#objects.push( this.#player );
+					this.#render();
+				}
+
+				#initfinish = () => {
+					this.#finish = new THREE.Mesh( this.#finishGeo, this.#finishMaterial );
+					this.#finish.position.set(50,0,0);
+					this.#finish.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
+					this.#scene.add( this.#finish );
+					this.#objects.push( this.#finish );
 					this.#render();
 				}
 
