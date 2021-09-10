@@ -11,7 +11,7 @@
 		<script src="three.js"></script>
 		<div id="info">
 			<strong>click</strong>: add voxel, <strong>shift + click</strong>: remove voxel</br>
-			use arrows to control characters, mouse for camera
+			use Z,Q,S and D to control characters, mouse for camera
 		</div>
 		<script type="module">
 			import * as test from './OrbitControls.js';
@@ -126,9 +126,9 @@
 
 				#onKeyDown = (event) => {
 					var keyCode = event.which;
-					if (keyCode == 90) {
+					if (keyCode == 83) {
 						this.#player.position.z += this.#ySpeed;
-					} else if (keyCode == 83) {
+					} else if (keyCode == 90) {
 						this.#player.position.z -= this.#ySpeed;
 					} else if (keyCode == 81) {
 						this.#player.position.x -= this.#xSpeed;
