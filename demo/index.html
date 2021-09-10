@@ -124,6 +124,7 @@
 					document.addEventListener( 'keydown', this.#onKeyDown );
 				}
 
+
 				#initplayer = () => {
 					this.#player = new THREE.Mesh( this.#playerGeo, this.#playerMaterial );
 					this.#player.position.set(this.#x,0,this.#y);
@@ -135,7 +136,7 @@
 
 				#initfinish = () => {
 					this.#finish = new THREE.Mesh( this.#finishGeo, this.#finishMaterial );
-					this.#finish.position.set(50,0,0);
+					this.#finish.position.set(50,0,-460);
 					this.#finish.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
 					this.#scene.add( this.#finish );
 					this.#objects.push( this.#finish );
