@@ -174,9 +174,10 @@
 					// console.log(this.#finishLine);
 					// console.log(this.#startingLine);
 
-					if (this.#finish.position.x == this.#player.position.x) {
+					if (this.#finish.position.x == this.#player.position.x && this.#finish.position.z == this.#player.position.z) {
 						console.log("you win !!");
 					}
+					this.#render();
 				}
 
 				#onPointerMove = (event) => {
