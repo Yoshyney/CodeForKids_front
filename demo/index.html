@@ -58,7 +58,8 @@
 					this.#camera.lookAt( 0, 0, 0 );
 
 					this.#scene = new THREE.Scene();
-					this.#scene.background = new THREE.Color( 0xf0f0f0 );
+					//this.#scene.background = new THREE.Color( 0xf0f0f0 );
+					this.#scene.background = new THREE.TextureLoader().load( "textures/testsol.jpg" );
 
 					// roll-over helpers
 
@@ -86,7 +87,7 @@
 
 					// grid
 
-					const gridHelper = new THREE.GridHelper( 1000, 20 );
+					const gridHelper = new THREE.GridHelper( 1000, 20, 0x0000ff, 0xff0000 )
 					this.#scene.add( gridHelper );
 
 					this.#raycaster = new THREE.Raycaster();
@@ -98,6 +99,8 @@
 					this.#plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { visible: false } ) );
 					this.#scene.add( this.#plane );
 					this.#objects.push( this.#plane );
+
+				
 
 					// lights
 	
@@ -169,6 +172,7 @@
 					} else if (keyCode == 68 && this.#x <= 400) {
 						this.#player.position.x += this.#xSpeed;
 						this.#x = this.#x+this.#xSpeed;
+						
 					}
 
 					// console.log(this.#finishLine);
@@ -177,6 +181,7 @@
 					if (this.#finish.position.x == this.#player.position.x) {
 						console.log("you win !!");
 					}
+					this.#render();
 				}
 
 				#onPointerMove = (event) => {
